@@ -1,0 +1,84 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "User entity with auth, roles, and status",
+      "type": "object",
+      "properties": {
+        "nombre": { "type": "string" },
+        "rut": { "type": "string" },
+        "rol": { "type": "string", "enum": ["ADMIN", "DESARROLLADOR", "RESPONSABLE", "TURNO", "VISITA"] },
+        "activo": { "type": "string", "enum": ["SÍ", "NO"] },
+        "puedeEditar": { "type": "boolean" },
+        "ultimoLogin": { "type": "string" },
+        "observaciones": { "type": "string" },
+        "clave": { "type": "string" }
+      },
+      "required": ["nombre", "rut", "rol", "activo", "puedeEditar"]
+    },
+    "cable": {
+      "title": "Cable",
+      "description": "Cable layout with checkmarks and progress tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "subestacion": { "type": "string" },
+        "tipo": { "type": "string" },
+        "plano": { "type": "string" },
+        "pagina": { "type": "string" },
+        "areaTablero": { "type": "string" },
+        "origen": { "type": "string" },
+        "puertoOrigen": { "type": "string" },
+        "destino": { "type": "string" },
+        "puertoDestino": { "type": "string" },
+        "tipoCable": { "type": "string" },
+        "medioConector": { "type": "string" },
+        "cantidadMetros": { "type": "number" },
+        "turno": { "type": "string" },
+        "responsable": { "type": "string" },
+        "tendido": { "type": "string", "enum": ["Sí", "No", "Observado", "N/A"] },
+        "conexionado": { "type": "string", "enum": ["Sí", "No", "Observado", "N/A"] },
+        "etiquetado": { "type": "string", "enum": ["Sí", "No", "Observado", "N/A"] },
+        "certificado": { "type": "string", "enum": ["Sí", "No", "Observado", "N/A"] },
+        "validadoSupervisor": { "type": "string", "enum": ["Sí", "No", "Observado", "N/A"] },
+        "avance": { "type": "number" },
+        "estadoGeneral": { "type": "string", "enum": ["Pendiente", "En ejecución", "Terminado", "Observado"] },
+        "fechaActualizacion": { "type": "string" },
+        "evidencia": { "type": "string" },
+        "observaciones": { "type": "string" }
+      },
+      "required": ["id", "subestacion", "tipo", "origen", "destino", "tendido", "conexionado", "etiquetado", "certificado", "validadoSupervisor", "avance", "estadoGeneral"]
+    },
+    "historyLog": {
+      "title": "HistoryLog",
+      "description": "Auditing and historical state logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "cableId": { "type": "string" },
+        "usuario": { "type": "string" },
+        "rut": { "type": "string" },
+        "rol": { "type": "string" },
+        "fecha": { "type": "string" },
+        "detalle": { "type": "string" },
+        "anteriorEstado": { "type": "string" },
+        "nuevoEstado": { "type": "string" }
+      },
+      "required": ["id", "cableId", "usuario", "rut", "rol", "fecha", "detalle", "anteriorEstado", "nuevoEstado"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "user",
+      "description": "List of authorized subestation workers"
+    },
+    "cables": {
+      "schema": "cable",
+      "description": "List of circuits (cables) being tracked in the project"
+    },
+    "historyLogs": {
+      "schema": "historyLog",
+      "description": "List of history and auditing logs"
+    }
+  }
+}

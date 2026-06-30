@@ -1,0 +1,6 @@
+{
+  "name": "Control de Avance F.O. + Ethernet",
+  "description": "Sistema digital para el control de tendido, conexionado, etiquetado y pruebas de fibra óptica y ethernet en subestaciones.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
